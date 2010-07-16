@@ -34,6 +34,19 @@
         <?php print_r($content); ?>
       </pre>
     </p>
-
+    <p>
+    <?php     
+if($_SESSION['status'] == 'verified') {
+  $xml = $connection->oAuthRequest( 'http://www.tumblr.com/api/likes', 'GET', '');
+  $dom = DomDocument::loadXML($xml);
+  
+  echo '<ul>';
+  foreach( $dom->documentElement->childNodes->item(0)->childNodes as $node) {
+    echo '<li>'.$node->getAttribute('url') .'</li>';
+  }
+  echo '</ul>';
+}
+    ?>
+    </p>
   </body>
 </html>

@@ -18,7 +18,7 @@ class TwitterOAuth {
   /* Contains the last API call. */
   public $url;
   /* Set up the API root URL. */
-  public $host = "https://api.twitter.com/1/";
+  public $host = "http://";
   /* Set timeout default. */
   public $timeout = 30;
   /* Set connect timeout. */
@@ -42,10 +42,10 @@ class TwitterOAuth {
   /**
    * Set API URLS
    */
-  function accessTokenURL()  { return 'https://api.twitter.com/oauth/access_token'; }
-  function authenticateURL() { return 'https://twitter.com/oauth/authenticate'; }
-  function authorizeURL()    { return 'https://twitter.com/oauth/authorize'; }
-  function requestTokenURL() { return 'https://api.twitter.com/oauth/request_token'; }
+  function accessTokenURL()  { return 'http://www.tumblr.com/oauth/access_token'; }
+  function authenticateURL() { return 'http://www.tumblr.com/oauth/authorize'; }
+  function authorizeURL()    { return 'http://www.tumblr.com/oauth/authorize'; }
+  function requestTokenURL() { return 'http://www.tumblr.com/oauth/request_token'; }
 
   /**
    * Debug helpers
@@ -177,7 +177,7 @@ class TwitterOAuth {
    */
   function oAuthRequest($url, $method, $parameters) {
     if (strrpos($url, 'https://') !== 0 && strrpos($url, 'http://') !== 0) {
-      $url = "{$this->host}{$url}.{$this->format}";
+      $url = "{$this->host}{$url}/{$this->format}";
     }
     $request = OAuthRequest::from_consumer_and_token($this->consumer, $this->token, $method, $url, $parameters);
     $request->sign_request($this->sha1_method, $this->consumer, $this->token);
